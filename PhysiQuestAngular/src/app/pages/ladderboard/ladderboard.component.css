@@ -1,0 +1,22 @@
+.custom-table {
+    font-size: 14px;
+  }
+  
+  .custom-table thead th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .custom-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .custom-table tbody tr:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .custom-table td {
+    vertical-align: middle !important;
+  }
+  
