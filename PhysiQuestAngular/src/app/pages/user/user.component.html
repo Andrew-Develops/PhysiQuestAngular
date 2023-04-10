@@ -1,85 +1,107 @@
 <div class="container">
     <br>
-    <button type="button" class="btn btn-primary" (click)="toggleBadges()">
-        {{ showBadges ? 'Hide Badges' : 'Show Badges' }}
-    </button>
 
-    <div *ngIf="showBadges">
-        <div class="mb-3">
-            <label for="search-username" class="form-label">Enter username to get badges:</label>
-            <input type="text" class="form-control" id="search-username" [(ngModel)]="searchedUsername">
-            <button type="button" class="btn btn-primary mt-2" (click)="onGetBadges()">Get Badges</button>
-        </div>
-
-        <div *ngIf="badgesLoaded">
-            <div *ngIf="badges.length > 0">
-                <h3>Badges for {{ searchedUsername }}:</h3>
-                <ul>
-                    <li *ngFor="let badge of badges">{{ badge.name }} ({{ badge.description }})</li>
-                </ul>
+    <div class="row">
+        <br>
+        <button (click)="togglePointsAndTokens()" class="btn btn-primary">{{showPointsAndTokens ? 'Hide Points and
+            Tokens' :
+            'Show Points and Tokens'}}</button>
+        <div *ngIf="showPointsAndTokens">
+            <div class="mb-3">
+                <br>
+                <h3>Get user points and tokens by username</h3>
+                <label for="points-tokens-username" class="form-label">Enter username:</label>
+                <input type="text" class="form-control" id="points-tokens-username" [(ngModel)]="pointsTokensUsername">
+                <button type="button" class="btn btn-primary mt-2" (click)="onGetUserPointsAndTokens()">Get Points and
+                    Tokens</button>
             </div>
-            <div *ngIf="badges.length === 0">
-                <h3>{{ searchedUsername }} has no badges.</h3>
+            <div *ngIf="userPointsAndTokens">
+                <h4>{{ pointsTokensUsername }}'s points and tokens:</h4>
+                <p>Points: {{ userPointsAndTokens.points }}</p>
+                <p>Tokens: {{ userPointsAndTokens.tokens }}</p>
             </div>
         </div>
+        <hr>
+        <br>
+        <button type="button" class="btn btn-primary" (click)="toggleBadges()">
+            {{ showBadges ? 'Hide Badges' : 'Show Badges' }}
+        </button>
+        <div *ngIf="showBadges">
+            <br>
+            <h3>Show badges by username</h3>
+            <div class="mb-3">
+                <label for="search-username" class="form-label">Enter username to get badges:</label>
+                <input type="text" class="form-control" id="search-username" [(ngModel)]="searchedUsername">
+                <button type="button" class="btn btn-primary mt-2" (click)="onGetBadges()">Get Badges</button>
+            </div>
+
+            <div *ngIf="badgesLoaded">
+                <div *ngIf="badges.length > 0">
+                    <h3>Badges for {{ searchedUsername }}:</h3>
+                    <ul>
+                        <li *ngFor="let badge of badges">{{ badge.name }} ({{ badge.description }})</li>
+                    </ul>
+                </div>
+                <div *ngIf="badges.length === 0">
+                    <h3>{{ searchedUsername }} has no badges.</h3>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <button type="button" class="btn btn-primary" (click)="toggleProofImageForm()">
+            {{ showProofImageForm ? 'Hide' : 'Show' }} Proof Image URL
+        </button>
+        <div *ngIf="showProofImageForm" class="mb-3">
+            <br>
+            <h3>Get the immage assigned to your username and quest</h3>
+            <label for="username-for-proof-image" class="form-label">Enter username:</label>
+            <input type="text" class="form-control" id="username-for-proof-image" [(ngModel)]="usernameForProofImage">
+            <label for="quest-id-for-proof-image" class="form-label">Enter quest ID:</label>
+            <input type="number" class="form-control" id="quest-id-for-proof-image" [(ngModel)]="questIdForProofImage">
+            <button type="button" class="btn btn-primary mt-2" (click)="onGetProofImageUrl()">Get Proof Image
+                URL</button>
+        </div>
+        <div *ngIf="proofImageUrl">
+            <h3>Proof image URL:</h3>
+            <p>{{ proofImageUrl }}</p>
+        </div>
+        <div *ngIf="proofImageUrlMessage" class="alert alert-info">{{ proofImageUrlMessage }}</div>
+        <hr>
+        <br>
+        <button type="button" class="btn btn-primary mb-3" (click)="toggleForm()">
+            Create your own quest
+        </button>
+        <form *ngIf="showForm" (submit)="onCreateQuest()">
+            <h3>Create your own quest if you have 20 tokens to spare</h3>
+            <div class="mb-3">
+                <label for="create-quest-username" class="form-label">Username:</label>
+                <input type="text" class="form-control form-control-lg" id="create-quest-username"
+                    [(ngModel)]="createQuestUsername" name="createQuestUsername">
+            </div>
+            <div class="mb-3">
+                <label for="create-quest-title" class="form-label">Title:</label>
+                <input type="text" class="form-control form-control-lg" id="create-quest-title"
+                    [(ngModel)]="createQuestTitle" name="createQuestTitle">
+            </div>
+            <div class="mb-3">
+                <label for="create-quest-description" class="form-label">Description:</label>
+                <input type="text" class="form-control form-control-lg" id="create-quest-description"
+                    [(ngModel)]="createQuestDescription" name="createQuestDescription">
+            </div>
+            <div class="mb-3">
+                <label for="create-quest-reward-points" class="form-label">Reward Points:</label>
+                <input type="number" class="form-control form-control-lg" id="create-quest-reward-points"
+                    [(ngModel)]="createQuestRewardPoints" name="createQuestRewardPoints">
+            </div>
+            <div class="mb-3">
+                <label for="create-quest-reward-tokens" class="form-label">Reward Tokens:</label>
+                <input type="number" class="form-control form-control-lg" id="create-quest-reward-tokens"
+                    [(ngModel)]="createQuestRewardTokens" name="createQuestRewardTokens">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Create Quest</button>
+        </form>
+        <br>
+        <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
     </div>
-
-    <br>
-    <br>
-    
-    <button type="button" class="btn btn-primary" (click)="toggleProofImageForm()">
-        {{ showProofImageForm ? 'Hide' : 'Show' }} Proof Image URL
-    </button>
-
-    <div *ngIf="showProofImageForm" class="mb-3">
-        <h3>Get proof image URL</h3>
-        <label for="username-for-proof-image" class="form-label">Enter username:</label>
-        <input type="text" class="form-control" id="username-for-proof-image" [(ngModel)]="usernameForProofImage">
-        <label for="quest-id-for-proof-image" class="form-label">Enter quest ID:</label>
-        <input type="number" class="form-control" id="quest-id-for-proof-image" [(ngModel)]="questIdForProofImage">
-        <button type="button" class="btn btn-primary mt-2" (click)="onGetProofImageUrl()">Get Proof Image URL</button>
-    </div>
-
-    <div *ngIf="proofImageUrl">
-        <h3>Proof image URL:</h3>
-        <p>{{ proofImageUrl }}</p>
-    </div>
-    <div *ngIf="proofImageUrlMessage" class="alert alert-info">{{ proofImageUrlMessage }}</div>
-
-    <br>
-    <br>
-
-    <button type="button" class="btn btn-primary mb-3" (click)="toggleForm()">
-        Create your own quest
-    </button>
-    <form *ngIf="showForm" (submit)="onCreateQuest()">
-        <div class="mb-3">
-            <label for="create-quest-username" class="form-label">Username:</label>
-            <input type="text" class="form-control form-control-lg" id="create-quest-username"
-                [(ngModel)]="createQuestUsername" name="createQuestUsername">
-        </div>
-        <div class="mb-3">
-            <label for="create-quest-title" class="form-label">Title:</label>
-            <input type="text" class="form-control form-control-lg" id="create-quest-title"
-                [(ngModel)]="createQuestTitle" name="createQuestTitle">
-        </div>
-        <div class="mb-3">
-            <label for="create-quest-description" class="form-label">Description:</label>
-            <input type="text" class="form-control form-control-lg" id="create-quest-description"
-                [(ngModel)]="createQuestDescription" name="createQuestDescription">
-        </div>
-        <div class="mb-3">
-            <label for="create-quest-reward-points" class="form-label">Reward Points:</label>
-            <input type="number" class="form-control form-control-lg" id="create-quest-reward-points"
-                [(ngModel)]="createQuestRewardPoints" name="createQuestRewardPoints">
-        </div>
-        <div class="mb-3">
-            <label for="create-quest-reward-tokens" class="form-label">Reward Tokens:</label>
-            <input type="number" class="form-control form-control-lg" id="create-quest-reward-tokens"
-                [(ngModel)]="createQuestRewardTokens" name="createQuestRewardTokens">
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Create Quest</button>
-    </form>
-    <br>
-    <div *ngIf="message" class="alert alert-danger">{{ message }}</div>
 </div>

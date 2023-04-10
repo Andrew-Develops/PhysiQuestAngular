@@ -5,42 +5,37 @@
     padding-left: 15px;
     padding-right: 15px;
   }
-.custom-form {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .custom-button {
-    margin-top: 20px;
-    width: 100%;
+  .btn-primary {
     background-color: #007bff;
-    border: none;
-  }
-  
-  .custom-button:hover {
-    background-color: #0062cc;
-  }
-  
-  .form-control:focus {
-    box-shadow: none;
     border-color: #007bff;
   }
   
-  .form-control::placeholder {
-    color: #aaa;
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .form-control-lg {
+    font-size: 18px;
+    padding: .5rem 1rem;
+  }
+  
+  .mb-3 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mt-2 {
+    margin-top: .5rem;
+  }
+  
+  .alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+    font-weight: bold;
   }
   

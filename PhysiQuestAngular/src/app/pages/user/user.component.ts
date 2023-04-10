@@ -3,6 +3,7 @@ import { QuestService } from 'src/app/services/quest.service';
 import { CreateAndUpdateQuestDTO } from 'src/app/models/create-and-update-quest-dto.model';
 import { UserService } from '../../services/user.service';
 import { BadgeDTO } from 'src/app/models/badge-dto.model';
+import { UserDTO } from 'src/app/models/user-dto.model';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { BadgeDTO } from 'src/app/models/badge-dto.model';
 })
 export class UserComponent {
   badges: BadgeDTO[] = [];
+  userPointsAndTokens: { points: number, tokens: number } | null = null;
+  pointsTokensUsername = '';
   searchedUsername: string = '';
   createQuestTitle: string = '';
   createQuestDescription: string = '';
@@ -26,6 +29,7 @@ export class UserComponent {
   badgesLoaded = false;
   showForm = false;
   showBadges = false;
+  showPointsAndTokens = false;
 
   message: string | null = null;
   showTable = false;
@@ -44,6 +48,9 @@ export class UserComponent {
   toggleProofImageForm() {
     this.showProofImageForm = !this.showProofImageForm;
   }
+  togglePointsAndTokens(): void {
+    this.showPointsAndTokens = !this.showPointsAndTokens;
+  }
   onGetBadges() {
     this.userService.getBadgesByUsername(this.searchedUsername).subscribe(
       (response) => {
@@ -57,6 +64,17 @@ export class UserComponent {
     );
   }
 
+  onGetUserPointsAndTokens(): void {
+    this.userService.getUserByUserName(this.pointsTokensUsername).subscribe(
+      (user: UserDTO) => {
+        this.userPointsAndTokens = { points: user.points, tokens: user.tokens };
+      },
+      (error) => {
+        console.error('Error getting user points and tokens:', error);
+        this.userPointsAndTokens = null;
+      }
+    );
+  }
   
   onGetProofImageUrl() {
     this.userService.getProofImageUrl(this.usernameForProofImage, this.questIdForProofImage).subscribe(
@@ -76,7 +94,6 @@ export class UserComponent {
       }
     );
   }
-  
   
   onCreateQuest(): void {
     this.questService.createUserQuest(this.createQuestUsername, {

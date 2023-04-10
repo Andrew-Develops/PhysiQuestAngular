@@ -5,6 +5,7 @@ import { QuestDTO } from '../models/quest-dto.model';
 import { CreateAndUpdateQuestDTO } from '../models/create-and-update-quest-dto.model';
 import { UserQuestDetailDTO } from '../models/user-quest-detail-dto.model';
 import { UserQuestDTO } from '../models/user-quest-dto.model';
+import { UserQuestDetailWithIdDTO } from '../models/user-quest-detail-with-id-dto.model';
 
 
 @Injectable({
@@ -31,8 +32,12 @@ export class QuestService {
     return this.http.get<QuestDTO[]>(`${this.apiUrl}/api/Quest/reward-tokens`);
   }
 
-  getQuestsForUser(username: string): Observable<UserQuestDetailDTO[]> {
-    return this.http.get<UserQuestDetailDTO[]>(`${this.apiUrl}/api/Quest/user?username=${username}`);
+  // getQuestsForUser(username: string): Observable<UserQuestDetailDTO[]> {
+  //   return this.http.get<UserQuestDetailDTO[]>(`${this.apiUrl}/api/Quest/user?username=${username}`);
+  // }
+
+  getQuestsForUser(username: string): Observable<UserQuestDetailWithIdDTO[]> {
+    return this.http.get<UserQuestDetailWithIdDTO[]>(`${this.apiUrl}/api/Quest/user?username=${username}`);
   }
 
   assignQuestToUser(username: string, questId: number): Observable<QuestDTO> {

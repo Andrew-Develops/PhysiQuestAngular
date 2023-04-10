@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestService } from 'src/app/services/quest.service';
 import { QuestDTO } from 'src/app/models/quest-dto.model';
-import { UserQuestDetailDTO } from 'src/app/models/user-quest-detail-dto.model';
+//import { UserQuestDetailDTO } from 'src/app/models/user-quest-detail-dto.model';
 import { UserQuestDTO } from 'src/app/models/user-quest-dto.model';
+import { UserQuestDetailWithIdDTO } from 'src/app/models/user-quest-detail-with-id-dto.model';
 
 @Component({
   selector: 'app-quest',
@@ -11,16 +12,19 @@ import { UserQuestDTO } from 'src/app/models/user-quest-dto.model';
 })
 export class QuestComponent implements OnInit {
   quests: QuestDTO[] = [];
+  userQuests: UserQuestDetailWithIdDTO[] = [];
   selectedSortOrder = 'default';
   selectedQuest: QuestDTO | null = null;
   username: string = '';
   searchUsername: string = '';
-  userQuests: UserQuestDetailDTO[] = [];
+  //userQuests: UserQuestDetailDTO[] = [];
   successMessage: string | null = null;
   completeQuestUsername: string = '';
   completeQuestImageUrl: string = '';
   completeQuestId: number | null = null;
   showCompleteQuestForm = false;
+  currentPage: number = 1;
+  itemsPerPage: number = 7;
 
   constructor(private questService: QuestService) { }
 
@@ -51,6 +55,14 @@ export class QuestComponent implements OnInit {
   
   toggleCompleteQuestForm(): void {
     this.showCompleteQuestForm = !this.showCompleteQuestForm;
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage = newPage;
+  }
+
+  numberOfPages(): number {
+    return Math.ceil(this.quests.length / this.itemsPerPage);
   }
 
   setSortOrder(sortOrder: string) {
@@ -100,6 +112,16 @@ export class QuestComponent implements OnInit {
         break;
       default:
         break;
+    }
+  }
+
+  onQuestCompletionButtonClick(questId: number): void {
+    // Prompt the user for their username and the image URL
+    const username = this.searchUsername;
+    const imageUrl = prompt('Enter the image URL:');
+    
+    if (username && imageUrl) {
+      this.completeUserQuest(questId, username, imageUrl);
     }
   }
 

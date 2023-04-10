@@ -1,5 +1,5 @@
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
   }
   
@@ -37,13 +37,31 @@
     color: #007bff;
   }
   
-  table.table td, table.table th {
-    border: none;
-    padding: 10px;
+  .table {
+    font-size: 16px;
+    font-weight: bold;
   }
   
-  table.table td {
-    font-size: 14px;
+  /* Set background color and font color for table header */
+  .table thead th {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  /* Set font color for table rows */
+  .table tbody td {
+    color: #212529;
+  }
+  
+  /* Set button style */
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
   }
   
   .badge {

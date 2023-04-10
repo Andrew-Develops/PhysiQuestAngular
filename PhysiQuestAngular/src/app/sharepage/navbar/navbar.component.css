@@ -7,3 +7,16 @@
     color: var(--primary-color);
     
 }
+.navbar-brand {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+  }
+
+.nav-link {
+    font-size: 1.2rem; 
+    color: #000; 
+    margin-left: 20px; 
+}
+.active-link {
+    font-weight: bold; /* stilul bold pentru link-ul activ */
+}

@@ -1,13 +1,39 @@
-.banner
-{
-    background-image: url('../../../assets/img/banner.jpg');
-    height: 550px;
-    background-position: center ;
-    background-size: cover;
-}
-.content
-{
-    top: 22%;
-    left: 20%;
-    position: absolute;
-}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1.text-center {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  ol {
+    font-size: 1.1rem;
+    margin-left: 20px;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  .get-started {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+  }

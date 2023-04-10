@@ -31,6 +31,10 @@ export class UserService {
     return this.http.post<UserDTO>(`${this.apiUrl}/User`, userDto);
   }
 
+  getUserByUserName(userName: string): Observable<UserDTO> {
+    return this.http.get<UserDTO>(`${this.apiUrl}/User/user-by-username/${userName}`);
+  }
+
   getBadgesByUsername(username: string): Observable<BadgeDTO[]> {
     return this.http.get<BadgeDTO[]>(`${this.apiUrl}/User/${username}/badges`);
   }
