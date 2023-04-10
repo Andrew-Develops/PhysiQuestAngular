@@ -12,6 +12,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AboutComponent } from './pages/about/about.component';
 import { LadderboardComponent } from './pages/ladderboard/ladderboard.component';
 import { QuestComponent } from './pages/quest/quest.component';
+import { UserComponent } from './pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { QuestComponent } from './pages/quest/quest.component';
     RegisterComponent,
     AboutComponent,
     LadderboardComponent,
-    QuestComponent
+    QuestComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

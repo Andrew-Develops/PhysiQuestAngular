@@ -1,105 +1,124 @@
 <div class="container">
-    <div class="my-4">
-      <select class="form-select" [(ngModel)]="selectedSortOrder" (change)="onSortOrderChanged()">
-        <option value="default">Default</option>
-        <option value="alphabetical">Alphabetical</option>
-        <option value="reward-points">Reward Points</option>
-        <option value="reward-tokens">Reward Tokens</option>
-      </select>
-    </div>
-  
-    <div class="table-responsive mb-4">
-        <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Points</th>
-        <th>Tokens</th>
-        <th>Assign</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let quest of quests">
-        <td>{{ quest.id }}</td>
-        <td>{{ quest.title }}</td>
-        <td>{{ quest.description }}</td>
-        <td>{{ quest.rewardPoints }}</td>
-        <td>{{ quest.rewardTokens }}</td>
-        <td>
-            <button class="btn btn-primary" (click)="showAssignForm(quest)">Assign</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
+    <section class="section-container">
+        <h2>Search for available Quests</h2>
+        <div class="my-4">
+            <select class="form-select" [(ngModel)]="selectedSortOrder" (change)="onSortOrderChanged()">
+                <option value="default">Default</option>
+                <option value="alphabetical">Alphabetical</option>
+                <option value="reward-points">Reward Points</option>
+                <option value="reward-tokens">Reward Tokens</option>
+            </select>
+        </div>
 
-  <div *ngIf="selectedQuest" class="mb-4">
-    <h2>Assign Quest: {{ selectedQuest.title }}</h2>
-    <form (ngSubmit)="assignQuestToUser()" #assignForm="ngForm">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <br>
-        <input type="text" class="form-control" id="username" required [(ngModel)]="username" name="username">
-        <br>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!assignForm.form.valid">Submit</button>
-      <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
-    </form>
-  </div>
-  
-  <div class="mb-4">
-    <div class="input-group">
-      <label for="username" class="input-group-text">Username:</label>
-      <input type="text" class="form-control" id="username" [(ngModel)]="searchUsername" />
-      <button class="btn btn-primary" (click)="getQuestsForUser(searchUsername)">Search</button>
-    </div>
-  </div>
+        <div class="table-responsive mb-4">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Points</th>
+                        <th>Tokens</th>
+                        <th>Assign</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let quest of quests">
+                        <td>{{ quest.id }}</td>
+                        <td>{{ quest.title }}</td>
+                        <td>{{ quest.description }}</td>
+                        <td>{{ quest.rewardPoints }}</td>
+                        <td>{{ quest.rewardTokens }}</td>
+                        <td>
+                            <button class="btn btn-primary" (click)="showAssignForm(quest)">Assign</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-  <div class="table-responsive">
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Reward Points</th>
-        <th>Reward Tokens</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let userQuest of userQuests">
-        <td>{{ userQuest.title }}</td>
-        <td>{{ userQuest.description }}</td>
-        <td>{{ userQuest.rewardPoints }}</td>
-        <td>{{ userQuest.rewardTokens }}</td>
-        <td>{{ userQuest.status }}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-  <button (click)="toggleCompleteQuestForm()" class="btn btn-primary">Toggle Complete Quest Form</button>
-  <div *ngIf="showCompleteQuestForm" class="complete-quest-form">
-  <div class="complete-quest-form">
-    <h3>Complete Quest</h3>
-    <form (submit)="completeQuestForm($event)">
-      <div class="form-group">
-        <label for="complete-quest-id">Quest ID:</label>
-        <input type="number" class="form-control" id="complete-quest-id" [(ngModel)]="completeQuestId" name="completeQuestId">
-      </div>
-      <div class="form-group">
-        <label for="complete-quest-username">Username:</label>
-        <input type="text" class="form-control" id="complete-quest-username" [(ngModel)]="completeQuestUsername" name="completeQuestUsername">
-      </div>
-      <div class="form-group">
-        <label for="complete-quest-image-url">Image URL:</label>
-        <input type="text" class="form-control" id="complete-quest-image-url" [(ngModel)]="completeQuestImageUrl" name="completeQuestImageUrl">
-      </div>
-      <br>
-      <button type="submit" class="btn btn-primary">Complete Quest</button>
-    </form>
+        <div *ngIf="selectedQuest" class="mb-4">
+            <h2>Assign Quest: {{ selectedQuest.title }}</h2>
+            <form (ngSubmit)="assignQuestToUser()" #assignForm="ngForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <br>
+                    <input type="text" class="form-control" id="username" required [(ngModel)]="username"
+                        name="username">
+                    <br>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!assignForm.form.valid">Submit</button>
+                <div *ngIf="successMessage" class="alert alert-success mt-3">{{ successMessage }}</div>
+            </form>
+        </div>
+    </section>
+    <br>
+    <hr>
+    <br>
+    <section class="section-container">
+        <div class="mb-4">
+            <h2>Search User Quests</h2>
+            <p>Enter a username to see their quests, including title, description, reward points, reward tokens, and
+                status.</p>
+            <div class="input-group">
+                <label for="username" class="input-group-text">Username:</label>
+                <input type="text" class="form-control" id="username" [(ngModel)]="searchUsername" />
+                <button class="btn btn-primary" (click)="getQuestsForUser(searchUsername)">Search</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Reward Points</th>
+                        <th>Reward Tokens</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let userQuest of userQuests">
+                        <td>{{ userQuest.title }}</td>
+                        <td>{{ userQuest.description }}</td>
+                        <td>{{ userQuest.rewardPoints }}</td>
+                        <td>{{ userQuest.rewardTokens }}</td>
+                        <td>{{ userQuest.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <br>
+    <hr>
+    <br>
+    <button (click)="toggleCompleteQuestForm()" class="btn btn-primary">Toggle Complete Quest Form</button>
+    <div *ngIf="showCompleteQuestForm" class="complete-quest-form">
+        <div class="complete-quest-form">
+            <br>
+            <h3>Complete Quest</h3>
+            <form (submit)="completeQuestForm($event)">
+                <div class="form-group">
+                    <label for="complete-quest-id">Quest ID:</label>
+                    <input type="number" class="form-control" id="complete-quest-id" [(ngModel)]="completeQuestId"
+                        name="completeQuestId">
+                </div>
+                <div class="form-group">
+                    <label for="complete-quest-username">Username:</label>
+                    <input type="text" class="form-control" id="complete-quest-username"
+                        [(ngModel)]="completeQuestUsername" name="completeQuestUsername">
+                </div>
+                <div class="form-group">
+                    <label for="complete-quest-image-url">Image URL:</label>
+                    <input type="text" class="form-control" id="complete-quest-image-url"
+                        [(ngModel)]="completeQuestImageUrl" name="completeQuestImageUrl">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Complete Quest</button>
+            </form>
+        </div>
     </div>
-    </div>
+    <br>
+    <br>
 </div>
-  

@@ -40,6 +40,10 @@ export class QuestService {
     return this.http.post<QuestDTO>(url, null);
   }
 
+  createUserQuest(username: string, questDto: CreateAndUpdateQuestDTO): Observable<QuestDTO> {
+    return this.http.post<QuestDTO>(`${this.apiUrl}/api/User/create-quest/${username}`, questDto);
+  }
+
   completeUserQuest(questId: number, username: string, imageUrl: string): Observable<UserQuestDTO> {
     const formData = new FormData();
     formData.append('imageUrl', imageUrl);
