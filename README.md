@@ -1,3 +1,5 @@
+*This project was completed within 5 days for a technical evaluation.
+
 # PhysiQuest
 
 PhysiQuest is an application that encourages users to live an active lifestyle by completing challenges and earning points. The app allows users to create and share custom challenges with friends and compete with others on the leaderboard.
@@ -26,6 +28,16 @@ The application is built using the following design patterns:
 ## Architecture
 
 The application is built following the Clean Architecture design pattern, which promotes separation of concerns and scalability.
+
+
+## Installation and Starting the Angular Frontend
+To install and run the Angular frontend, follow these steps:
+
+1. Clone the PhysiQuestAngular repository from https://github.com/Andrew-Develops/PhysiQuestAngular
+2. Navigate to the project directory in your terminal
+3. Run `npm install` to install the project dependencies
+4. Run `ng serve` to start the development server
+5. Open your browser and navigate to http://localhost:4200 to view the application
 
 ## Usage
 
