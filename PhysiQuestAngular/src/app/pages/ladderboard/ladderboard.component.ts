@@ -11,8 +11,8 @@ import { UserDTO } from '../../models/user-dto.model';
 export class LadderboardComponent implements OnInit {
   users: UserDTO[] = [];
   isLadderboardVisible = false;
-
-  constructor(private userService: UserService) { }
+  
+  constructor(private userService: UserService) {}
 
   toggleLadderboard() {
     this.isLadderboardVisible = !this.isLadderboardVisible;
@@ -28,5 +28,4 @@ export class LadderboardComponent implements OnInit {
       },
     });
   }
-  
 }

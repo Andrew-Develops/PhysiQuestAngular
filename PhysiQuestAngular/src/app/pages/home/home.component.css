@@ -1,0 +1,13 @@
+.banner
+{
+    background-image: url('../../../assets/img/banner.jpg');
+    height: 550px;
+    background-position: center ;
+    background-size: cover;
+}
+.content
+{
+    top: 22%;
+    left: 20%;
+    position: absolute;
+}

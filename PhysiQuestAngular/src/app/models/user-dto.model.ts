@@ -4,4 +4,5 @@ export interface UserDTO {
     email: string;
     points: number;
     tokens: number;
+    displayEmail?: string;
   }

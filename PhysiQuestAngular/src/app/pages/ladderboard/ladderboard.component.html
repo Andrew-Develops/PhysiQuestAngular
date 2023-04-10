@@ -1,26 +1,33 @@
-<br>
+<!--<br>
 <button class="btn btn-primary" (click)="toggleLadderboard()">Toggle Ladderboard</button>
-<div *ngIf="isLadderboardVisible">
-  <br>
-  <table class="table table-striped table-bordered custom-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Points</th>
-        <th>Tokens</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td class="text-center">{{ user.points }}</td>
-        <td class="text-center">{{ user.tokens }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<div *ngIf="isLadderboardVisible">-->
+  <div>
+    <br>
+  <div class="container">
+    <table class="table table-striped table-hover custom-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th class="text-center">Points</th>
+          <th class="text-center">Tokens</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td class="email">
+            <span>{{ user.email }}</span>
+          </td>
+          <td class="text-center">{{ user.points }}</td>
+          <td class="text-center">{{ user.tokens }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  
+  
 
 
   
