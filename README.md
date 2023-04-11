@@ -46,3 +46,19 @@ The user-friendly interface and modern design make it easy to navigate and acces
 ## Author
 
 This application was created by Cosmin Andrei Fuica.
+
+## Images
+
+![image](./img/1.jpg)
+
+![image](./img/2.jpg)
+
+![image](./img/3.jpg)
+
+![image](./img/4.1.jpg)
+
+![image](./img/4.2.jpg)
+
+![image](./img/5.jpg)
+
+![image](./img/6.jpg)
