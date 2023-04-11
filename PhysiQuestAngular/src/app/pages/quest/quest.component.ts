@@ -38,14 +38,14 @@ export class QuestComponent implements OnInit {
   }
 
   getQuestsForUser(username: string): void {
-    this.questService.getQuestsForUser(username).subscribe(
-      (quests) => {
+    this.questService.getQuestsForUser(username).subscribe({
+      next: (quests) => {
         this.userQuests = quests;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching quests for user:', error);
-      }
-    );
+      },
+    });
   }
 
   completeQuestForm(event: Event): void {
@@ -73,12 +73,11 @@ export class QuestComponent implements OnInit {
 
   assignQuestToUser(): void {
     if (!this.selectedQuest) return;
-
-    // Check if the user already has the quest.
+  
     const userHasQuest = this.userQuests.some(
       (userQuest) => userQuest.id === this.selectedQuest?.id
     );
-
+  
     if (userHasQuest) {
       this.errorMessage = 'User already has this quest.';
       setTimeout(() => {
@@ -86,32 +85,32 @@ export class QuestComponent implements OnInit {
       }, 5000);
       return;
     }
-
-    this.questService.assignQuestToUser(this.username, this.selectedQuest.id).subscribe(
-      (userQuest: QuestDTO) => {
+  
+    this.questService.assignQuestToUser(this.username, this.selectedQuest.id).subscribe({
+      next: (userQuest: QuestDTO) => {
         console.log('Quest assigned successfully:', userQuest);
         this.selectedQuest = null;
         this.username = '';
         this.successMessage = 'Quest assigned successfully!';
         setTimeout(() => {
           this.successMessage = null;
-          }, 5000);
+        }, 5000);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error assigning quest:', error);
-      }
-    );
+      },
+    });
   }
 
   completeUserQuest(questId: number, username: string, imageUrl: string): void {
-    this.questService.completeUserQuest(questId, username, imageUrl).subscribe(
-      (completedUserQuest: UserQuestDTO) => {
+    this.questService.completeUserQuest(questId, username, imageUrl).subscribe({
+      next: (completedUserQuest: UserQuestDTO) => {
         console.log('Quest completed successfully:', completedUserQuest);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error completing quest:', error);
-      }
-    );
+      },
+    });
   }
 
   loadQuests(): void {
@@ -131,7 +130,6 @@ export class QuestComponent implements OnInit {
   }
 
   onQuestCompletionButtonClick(questId: number): void {
-    // Prompt the user for their username and the image URL
     const username = this.searchUsername;
     const imageUrl = prompt('Enter the image URL:');
     
@@ -142,17 +140,16 @@ export class QuestComponent implements OnInit {
 
   onDeleteUserQuestButtonClick(questId: number): void {
     const username = this.searchUsername;
-  
     if (username) {
-      this.questService.deleteUserQuest(username, questId).subscribe(
-        (deletedUserQuest) => {
+      this.questService.deleteUserQuest(username, questId).subscribe({
+        next: (deletedUserQuest) => {
           console.log('Quest deleted successfully:', deletedUserQuest);
           this.getQuestsForUser(username);
         },
-        (error) => {
+        error: (error) => {
           console.error('Error deleting quest:', error);
-        }
-      );
+        },
+      });
     }
   }
   
