@@ -55,4 +55,10 @@ export class QuestService {
     const queryParams = new HttpParams().set('username', username);
     return this.http.put<UserQuestDTO>(`${this.apiUrl}/api/Quest/complete/${questId}`, formData, { params: queryParams });
   }
+
+  deleteUserQuest(username: string, questId: number): Observable<UserQuestDTO> {
+    const params = new HttpParams().set('username', username);
+    return this.http.delete<UserQuestDTO>(`${this.apiUrl}/api/Quest/delete/${questId}`, { params });
+  }
+  
 }

@@ -13,11 +13,12 @@ import { UserQuestDetailWithIdDTO } from 'src/app/models/user-quest-detail-with-
 export class QuestComponent implements OnInit {
   quests: QuestDTO[] = [];
   userQuests: UserQuestDetailWithIdDTO[] = [];
+  //userQuests: UserQuestDetailDTO[] = [];
   selectedSortOrder = 'default';
   selectedQuest: QuestDTO | null = null;
   username: string = '';
+  errorMessage: string | null = null;
   searchUsername: string = '';
-  //userQuests: UserQuestDetailDTO[] = [];
   successMessage: string | null = null;
   completeQuestUsername: string = '';
   completeQuestImageUrl: string = '';
@@ -73,6 +74,19 @@ export class QuestComponent implements OnInit {
   assignQuestToUser(): void {
     if (!this.selectedQuest) return;
 
+    // Check if the user already has the quest.
+    const userHasQuest = this.userQuests.some(
+      (userQuest) => userQuest.id === this.selectedQuest?.id
+    );
+
+    if (userHasQuest) {
+      this.errorMessage = 'User already has this quest.';
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 5000);
+      return;
+    }
+
     this.questService.assignQuestToUser(this.username, this.selectedQuest.id).subscribe(
       (userQuest: QuestDTO) => {
         console.log('Quest assigned successfully:', userQuest);
@@ -88,6 +102,7 @@ export class QuestComponent implements OnInit {
       }
     );
   }
+
   completeUserQuest(questId: number, username: string, imageUrl: string): void {
     this.questService.completeUserQuest(questId, username, imageUrl).subscribe(
       (completedUserQuest: UserQuestDTO) => {
@@ -125,6 +140,22 @@ export class QuestComponent implements OnInit {
     }
   }
 
+  onDeleteUserQuestButtonClick(questId: number): void {
+    const username = this.searchUsername;
+  
+    if (username) {
+      this.questService.deleteUserQuest(username, questId).subscribe(
+        (deletedUserQuest) => {
+          console.log('Quest deleted successfully:', deletedUserQuest);
+          this.getQuestsForUser(username);
+        },
+        (error) => {
+          console.error('Error deleting quest:', error);
+        }
+      );
+    }
+  }
+  
   onSortOrderChanged(): void {
     this.loadQuests();
   }
